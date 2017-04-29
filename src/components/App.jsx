@@ -5,9 +5,7 @@ import Hero from './Hero'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isStarted: false
-    }
+    this.state = { isStarted: false }
   }
   
   getStarted() {
@@ -20,7 +18,12 @@ class App extends Component {
     return (
       <div className="hero is-info is-fullheight is-bold">
         {
-          this.state.isStarted ? <Quiz /> : <Hero getStarted={this.getStarted.bind(this)} />
+          this.state.isStarted ? 
+            <Quiz /> : 
+            <Hero 
+              title="Untitle"
+              buttonText="Get Started"
+              getStarted={this.getStarted.bind(this)} />
         }
       </div>
     )
