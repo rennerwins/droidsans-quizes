@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import QuizItem from './QuizItem'
 import CorrectedUser from './CorrectedUser'
+import ShowWinner from './ShowWinner'
+
+const showWinnerButton = {
+  'margin': '6px'
+}
 
 class QuizList extends Component {
   constructor(props) {
@@ -9,7 +14,8 @@ class QuizList extends Component {
     this.state = {
       questions: [],
       index: 0,
-      show: false
+      show: false,
+      totals: false
     }
   }
   componentWillMount() {
@@ -51,44 +57,59 @@ class QuizList extends Component {
       }
     })
   }
+
+  showTotals() {
+    this.setState((state) => {
+      return {
+        totals: !state.totals
+      }
+    })
+  }
   
   render() {
-    let prevButton = <a className="card-footer-item" onClick={() => this.prevQuestion()}>Prev</a>
-    let nextButton = <a className="card-footer-item" onClick={() => this.nextQuestion()}>Next</a>
-    let showResults = <a className="card-footer-item" onClick={() => this.showResults()}>Results</a>
+    let prevButton = <button className="button is-outlined is-primary" onClick={() => this.prevQuestion()}>Prev</button>
+    let nextButton = <button className="button is-outlined is-primary" onClick={() => this.nextQuestion()}>Next</button>
+    let showResults = <button className="button is-outlined is-info" onClick={() => this.showResults()}>Results</button>
 
-    return (
-      <div>
-        {
-          this.state.questions.map((question, index) => {
-            if (index === this.state.index) {
-              return (
-                <div key={index} className="card">
-                  <header className="card-header">
-                    <p className="card-header-title">Question {index + 1}</p>
-                  </header>
-                  <div className="card-content">
-                    <QuizItem question={question} show={this.state.show}  />
+    if (!this.state.totals) {
+      return (
+        <div>
+          {
+            this.state.questions.map((question, index) => {
+              if (index === this.state.index) {
+                return (
+                  <div key={index} className="card">
+                    <header className="card-header">
+                      <p className="card-header-title">Question {index + 1}</p>
+                      {
+                        (this.state.index === (this.state.questions.length - 1)) ? <button style={showWinnerButton} className="button is-info is-pulled-right" onClick={() => this.showTotals()}>Totals</button> : null
+                      }
+                    </header>
+                    <div className="card-content">
+                      <QuizItem question={question} show={this.state.show}  />
+                    </div>
+                    <div className="columns is-mobile has-text-centered">
+                      <div className="column is-4">{prevButton}</div>
+                      <div className="column is-4">{showResults}</div>
+                      <div className="column is-4">{nextButton}</div>
+                    </div>
+                      {
+                        this.state.show ? <CorrectedUser user={question.correctedUsers} /> : null
+                      }
                   </div>
-                  
-                  <footer className="card-footer">
-                    {prevButton}
-                    {showResults}
-                    {nextButton}
-                  </footer>
-                  {
-                    this.state.show ? <CorrectedUser user={question.correctedUsers} /> : null
-                  }
-                </div>
-              )
-            } else {
-              return null
-            }
-          })
-        }
-        
-      </div>
-    )
+                )
+              } else {
+                return null
+              }
+            })
+          }
+        </div>
+      )
+    } else {
+      return (
+        <ShowWinner />
+      )
+    }
   }
 }
 

@@ -11,7 +11,7 @@ class Hero extends Component {
         <div className="hero-body">
           <div className="container has-text-centered">
             <h1 className="title is-2 has-text-centered animated fadeInDown">
-              Droidsans Quizes
+              Untitled
             </h1>
             <a 
               onClick={this.getStarted.bind(this)}
