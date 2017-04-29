@@ -1,28 +1,36 @@
 import React, { Component } from 'react'
 
-const styles = {
-  'color': 'red'
+const correctedStyle = {
+  'padding': '12px',
+  'backgroundColor': '#00D1B2',
+  'color': 'white',
+  'border': 'none',
+  'margin': '8px',
+  'borderRadius': '3px',
+}
+
+const cardStyles = {
+  'padding': '12px',
+  'borderRadius': '3px',
+  'margin': '8px'
 }
 
 class QuizItem extends Component {
   render() {
     let choices = (
       this.props.question.choices.map((choice, index) => {
-        // return <li key={choice}>{choice}</li>
         if (choice === this.props.question.answer && this.props.show) {
-          return <li key={choice} style={styles}>{choice}</li>
+          return <div className="card" key={choice} style={correctedStyle}>{choice}</div>
         } else {
-          return <li key={choice}>{choice}</li>
+          return <div className="card" style={cardStyles} key={choice}>{choice}</div>
         }
       })
     )
 
     return (
-      <div>
+      <div className="content">
         <h1>{this.props.question.question}</h1>
-        <ul>
-          {choices}
-        </ul>
+        {choices}
       </div>
     )
   }
