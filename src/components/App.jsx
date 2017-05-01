@@ -1,31 +1,27 @@
 import React, { Component } from 'react'
 import Quiz from './quiz/Quiz'
+import ParticipantList from './ParticipantList'
 import Hero from './Hero'
+import ShowWinner from './quiz/ShowWinner'
+import { BrowserRouter as Router, Route } from 'react-router-dom' 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isStarted: false }
-  }
-  
-  getStarted() {
-    this.setState((state) => {
-      return { isStarted: !state.isStarted }
-    })
-  }
-  
   render() {
     return (
-      <div className="hero is-info is-fullheight is-bold">
-        {
-          this.state.isStarted ? 
-            <Quiz /> : 
-            <Hero 
+      <Router>
+        <div className="hero is-info is-fullheight is-bold">
+          <Route exact path="/" render={() => 
+            <Hero
               title="Untitle"
-              buttonText="Get Started"
-              getStarted={this.getStarted.bind(this)} />
-        }
-      </div>
+              buttonText="Get Started"/>
+          } />
+
+          <Route path="/participants" component={ParticipantList} />
+
+          <Route path="/quiz" component={Quiz} />
+          <Route path="/winners" component={ShowWinner} />
+        </div>
+      </Router>
     )
   }
 }

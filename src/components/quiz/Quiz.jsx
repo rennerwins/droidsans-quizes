@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import QuizItem from './QuizItem'
 import CorrectedUser from './CorrectedUser'
 import ShowWinner from './ShowWinner'
+import { Link } from 'react-router-dom'
 
 const styles = {
   'marginTop': '30px',
@@ -76,7 +77,7 @@ class Quiz extends Component {
     const { number, questions, totals } = this.state
 
     if (number === questions.length - 1) {
-      winnerButton = <button style={showWinnerButton} className="button is-info is-pulled-right" onClick={() => this.showTotals()}>Totals</button>
+      winnerButton = <Link to="/winners" style={showWinnerButton} className="button is-info is-pulled-right" onClick={() => this.showTotals()}>Totals</Link>
     }
     prevButton = <button className="button is-outlined is-primary" onClick={() => this.prevQuestion()}>Prev</button>
     nextButton = <button className="button is-outlined is-primary" onClick={() => this.nextQuestion()}>Next</button>
@@ -108,10 +109,10 @@ class Quiz extends Component {
                   <div className="column is-4">{showResults}</div>
                   <div className="column is-4">{nextButton}</div>
                 </div>
-
                 {
                   this.state.show ? <CorrectedUser users={this.state.questions[this.state.number].correctedUsers} /> : null
                 }
+                
               </div>
             </div>
           </div>
@@ -122,7 +123,7 @@ class Quiz extends Component {
         <ShowWinner />
       )
     }
-    
+
   }
 }
 
