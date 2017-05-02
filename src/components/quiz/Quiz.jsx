@@ -32,6 +32,12 @@ class Quiz extends Component {
         questions: res.questions
       })
     })
+
+    fetch('https://dsmbot.herokuapp.com/activateQ?qnumber=1')
+    .then(res => res.json())
+    .then(res => {
+      console.log('first quiz', res)
+    })
   }
   
   showTotals() {
@@ -40,6 +46,11 @@ class Quiz extends Component {
         totals: !state.totals
       }
     })
+    fetch('https://dsmbot.herokuapp.com/endQuizNow')
+    .then(res => res.json())
+    .then(res => {
+      console.log('quiz ended', res)
+    }) 
   }
 
   nextQuestion() {
@@ -49,6 +60,11 @@ class Quiz extends Component {
           number: state.number + 1,
           show: false
         }
+      })
+      fetch(`https://dsmbot.herokuapp.com/activateQ?qnumber=${this.state.number+2}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(`question number ${this.state.number + 1}`, res)
       })
     }
   }

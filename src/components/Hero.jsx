@@ -4,9 +4,24 @@ import './Hero.css'
 import { Link } from 'react-router-dom'
 
 const Hero = ({ buttonText, title, getStarted }) => {
-  // const getStart = () => {
-  //   getStarted()
-  // }
+  const changeEnterStatus = () => {
+    fetch('https://dsmbot.herokuapp.com/changeEnterStatus?value=open')
+      .then(res => res.json())
+      .then(res => {
+        console.log('enter status', res)
+      })
+  }
+
+  const getStart = () => {
+    fetch('https://dsmbot.herokuapp.com/changeReadyToStart')
+    .then(res => res.json())
+    .then(res => {
+      console.log('ready to start', res)
+      if (res.status === 'done') {
+        changeEnterStatus()
+      }
+    })
+  }
 
   return (
     <section className="hero is-info is-fullheight is-bold">
@@ -18,7 +33,7 @@ const Hero = ({ buttonText, title, getStarted }) => {
           </h1>
             <Link 
               to="/participants" 
-              // onClick={getStart}
+              onClick={getStart}
               className="button is-info is-inverted is-outlined animated fadeInUp">
               {buttonText}
             </Link>
