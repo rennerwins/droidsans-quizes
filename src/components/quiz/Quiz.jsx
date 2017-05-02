@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import QuizItem from './QuizItem'
 import CorrectedUser from './CorrectedUser'
 import ShowWinner from './ShowWinner'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const styles = {
-  'marginTop': '30px',
-  // 'color': '#333'
+  'marginTop': '20px',
+  'color': '#333'
 }
 
 const showWinnerButton = {
@@ -54,7 +54,9 @@ class Quiz extends Component {
   }
 
   nextQuestion() {
-    if (this.state.number >= 0 && this.state.number < this.state.questions.length - 1) {
+    if (this.state.number ===  this.state.questions.length - 1) {
+      this.showTotals()
+    } else if (this.state.number >= 0 && this.state.number < this.state.questions.length - 1) {
       this.setState((state) => {
         return {
           number: state.number + 1,
@@ -87,60 +89,76 @@ class Quiz extends Component {
       }
     })
   }
+
+  testKeyDown(e) {
+    console.log('hi')
+  }
   
   render() {
-    let winnerButton, prevButton, nextButton, showResults = null
-    const { number, questions, totals } = this.state
+    let winnerButton, prevButton, nextButton = null
+    let { number, questions, totals } = this.state
 
-    if (number === questions.length - 1) {
-      winnerButton = <Link to="/winners" style={showWinnerButton} className="button is-info is-pulled-right" onClick={() => this.showTotals()}>Totals</Link>
-    }
-    prevButton = <button className="button is-outlined is-primary" onClick={() => this.prevQuestion()}>Prev</button>
-    nextButton = <button className="button is-outlined is-primary" onClick={() => this.nextQuestion()}>Next</button>
-    showResults = <button className="button is-outlined is-info" onClick={() => this.showResults()}>Results</button>
+    // if (number == questions.length) {
+      
+    //   // winnerButton = <Link to="/winners" style={showWinnerButton} className="button is-info is-pulled-right" onClick={() => this.showTotals()}>Totals</Link>
+    //   return <Redirect to="/winners" />
+    // }
 
     if (!totals) {
       return (
-        <div className="container animated fadeIn" style={styles}>
-          <div className="columns">
-            <div className="column is-half is-offset-one-quarter">
-              <div className="card">
-                <header className="card-header">
-                  <p className="card-header-title">Question {this.state.number + 1}</p>
-                  {winnerButton}
-                </header>
-                <div className="card-content">
-                  {
-                    this.state.questions.map((question, index) => {
-                      if (index === number) {
-                        return <QuizItem key={index} question={question} show={this.state.show} index={this.state.number} />
-                      }
-                      return null
-                    })
-                  }
-                </div>
-                
-                <div className="columns is-mobile has-text-centered">
-                  <div className="column is-4">{prevButton}</div>
-                  <div className="column is-4">{showResults}</div>
-                  <div className="column is-4">{nextButton}</div>
-                </div>
-                {
-                  this.state.show ? <CorrectedUser users={this.state.questions[this.state.number].correctedUsers} /> : null
-                }
-                
+        <div className="container animated fadeIn" style={styles} onClick={() => this.nextQuestion()}>
+          <div className="bg-container">
+            <div className="columns is-mobile">
+              <img className="gim-left" src="static/gim-left.png" alt="gim-left" />
+                <div className="column main-column">
+                  <div className="content">
+                    {
+                      this.state.questions.map((question, index) => {
+                        if (index === number) {
+                          return <QuizItem key={index} question={question} show={this.state.show} index={this.state.number} />
+                        }
+                        return null
+                      })
+                    }
+                </div>          
+                <img className="gail-right" src="static/gail-right.png" alt="gail-right" />
               </div>
             </div>
           </div>
         </div>
       )
-    } else {
-      return (
-        <ShowWinner />
-      )
     }
 
+    return null
   }
 }
 
 export default Quiz
+
+// this.state.show ? <CorrectedUser users={this.state.questions[this.state.number].correctedUsers} /> : null
+
+
+  // <div className= "column is-half is-offset-one-quarter">
+  //   <div className="card">
+  //     <header className="card-header">
+  //       <p className="card-header-title">Question {this.state.number + 1}</p>
+  //       {winnerButton}
+  //     </header>
+  //     <div className="card-content">
+        // {
+        //   this.state.questions.map((question, index) => {
+        //     if (index === number) {
+        //       return <QuizItem key={index} question={question} show={this.state.show} index={this.state.number} />
+        //     }
+        //     return null
+        //   })
+        // }
+  //     </div>
+
+      // <div className="columns is-mobile has-text-centered">
+      //   <div className="column is-4">{prevButton}</div>
+      //   <div className="column is-4">{showResults}</div>
+      //   <div className="column is-4">{nextButton}</div>
+      // </div>
+  //   </div>
+  // </div>

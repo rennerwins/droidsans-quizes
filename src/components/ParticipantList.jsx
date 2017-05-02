@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { firebaseApp } from '../firebase'
+import './App.css'
 
 const styles = {
   'marginTop': '20px',
@@ -9,8 +10,8 @@ const styles = {
 
 const userAvatar = {
   'borderRadius': '50%',
-  'width': '100px',
-  'maxHeight': '100px'
+  'width': '80px',
+  'height': '80px'
 }
 
 class ParticipantList extends Component {
@@ -71,26 +72,34 @@ class ParticipantList extends Component {
   
   render() {
     return (
-      <div className="container" style={styles}>
-        <div className="box">
-          <div className="columns ">
-            <div className="column content has-text-centered">
-              <h1>Participants</h1>
-              <Link to="/quiz" className="button is-primary" onClick={this.closeStatus.bind(this)}>Start Quiz</Link>
+      <div className="container " style={styles}>
+        <div className="bg-container">
+          <div className="columns is-mobile">
+            <img className="gim-left" src="static/gim-left.png" alt="gim-left" />
+
+            <div className="column main-column">
+              <div className="column content has-text-centered">
+                <h1>Participants</h1>
+                <Link to="/quiz" className="button is-primary" onClick={this.closeStatus.bind(this)}>Start Quiz</Link>
+              </div>
+
+              <div className="columns is-multiline is-tablet scrolling">
+                {
+                  this.state.players.map(user => {
+                    return (
+                      <div className="column is-2 has-text-centered" key={user.createdAt}>
+                        <img style={userAvatar} src={user.profilePic} alt="user-avatar" />
+                      </div>
+                    )
+                  })
+                }
+              </div>
             </div>
+
+            <img className="gail-right" src="static/gail-right.png" alt="gail-right" />
           </div>
-          <div className="columns is-multiline is-tablet">
-            {
-              this.state.players.map(user => {
-                return (
-                  <div className="column is-4 has-text-centered" key={user.createdAt}>
-                    <img style={userAvatar} src={user.profilePic} alt="user-avatar" />
-                    <p style={{'color': '#333'}}>{user.firstName} {user.lastName}</p>
-                  </div>  
-                )
-              })
-            }
-          </div>
+         
+          
         </div>
       </div>
     )
@@ -98,3 +107,5 @@ class ParticipantList extends Component {
 }
 
 export default ParticipantList
+
+  // < p style= {{'color': '#333' }}>{ user.firstName } {user.lastName }</p >
