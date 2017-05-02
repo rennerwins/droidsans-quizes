@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import QuizItem from './QuizItem'
-import CorrectedUser from './CorrectedUser'
-import ShowWinner from './ShowWinner'
-import { Route, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Quiz extends Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class Quiz extends Component {
     fetch('https://dsmbot.herokuapp.com/activateQ?qnumber=1')
     .then(res => res.json())
     .then(res => {
-      console.log('first quiz', res)
+      console.log('question number 1', res)
     })
   }
   
@@ -83,8 +81,7 @@ class Quiz extends Component {
   }
   
   render() {
-    let { number, questions, totals } = this.state
-    console.log(totals)
+    let { number, totals } = this.state
     return (
       !totals ? 
         (
