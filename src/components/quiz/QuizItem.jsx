@@ -11,7 +11,8 @@ const cardStyles = {
 const questions = {
   'whiteSpace': 'pre-line',
   'color': '#726658',
-  'marginBottom': '20px'
+  'marginBottom': '20px',
+  'marginTop': '20px'
 }
 
 const QuizItem = ({ question, show, index }) => {
@@ -24,6 +25,8 @@ const QuizItem = ({ question, show, index }) => {
   return (
     <div className="content">
       <h2 style={questions}>{index + 1}. {question.question}</h2>
+      <br />
+
       {choices}
     </div>
   )

@@ -75,7 +75,7 @@ class ParticipantList extends Component {
           <Link to="/quiz" className="button is-primary" onClick={this.closeStatus.bind(this)}>Start Quiz</Link>
         </div>
 
-        <div className="columns is-multiline is-tablet scrolling">
+        <div className="columns is-multiline is-mobile scrolling">
           {
             this.state.players.map(user => {
               return (

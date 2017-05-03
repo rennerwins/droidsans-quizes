@@ -20,11 +20,11 @@ class Layout extends Component {
       <section>
         <div className="container">
           <div className="columns bg-container">
-            <img className="gim-left" src="static/gim-left.png" alt="gim-left" />
+            <img className="gim-left is-hidden-mobile" src="static/gim-left.png" alt="gim-left" />
 
               { currentPath }
 
-            <img className="gail-right" src="static/gail-right.png" alt="gail-right" />
+            <img className="gail-right is-hidden-mobile" src="static/gail-right.png" alt="gail-right" />
           </div>
         </div>
       </section>
