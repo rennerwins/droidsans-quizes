@@ -27,7 +27,7 @@ const Hero = ({ buttonText, title, getStarted }) => {
     <section className="hero is-info is-fullheight is-bold">
       <div className="hero-body">
         <div className="container has-text-centered">
-          <img className="moving-logo" src="static/logo.png" alt="android" />
+          <img className="moving-logo animated fadeInDown" src="static/logo.png" alt="android" />
           <h1 className="title is-2 has-text-centered animated fadeInDown">
             GailGim
           </h1>
@@ -35,7 +35,7 @@ const Hero = ({ buttonText, title, getStarted }) => {
               to="/participants" 
               onClick={getStart}
               className="button is-info is-inverted is-outlined animated fadeInUp">
-              Get Started
+              Get Start
             </Link>
         </div>
       </div>
