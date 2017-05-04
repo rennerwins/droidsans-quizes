@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import QuizItem from './QuizItem'
 import { Redirect } from 'react-router-dom'
+import UserAvatar from'../UserAvatar'
 
 class Quiz extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Quiz extends Component {
       questions: [],
       number: 0,
       show: false,
-      totals: false
+      totals: false,
+      correctUsers: []
     }
   }
 
@@ -40,7 +42,6 @@ class Quiz extends Component {
     .then(res => {
       console.log('quiz ended', res)
     }) 
-    
   }
 
   nextQuestion() {
@@ -72,7 +73,28 @@ class Quiz extends Component {
     }
   }
 
+  getCorrectedUsers(number) {
+    fetch(`https://dsmbot.herokuapp.com/getCorrectUsers?quizNO=${number+1}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        correctUsers: res.correctUsersInfo
+      })
+    })
+  }
+
   showResults() {
+    const { show, number } = this.state
+    if (!show) {
+      this.changeShowStatus()
+      this.getCorrectedUsers(number)
+    } else {
+      this.changeShowStatus()
+      this.nextQuestion()
+    }
+  }
+
+  changeShowStatus() {
     this.setState((state) => {
       return {
         show: !state.show
@@ -81,11 +103,20 @@ class Quiz extends Component {
   }
   
   render() {
-    let { number, totals } = this.state
+    let { number, totals, show, correctUsers } = this.state
+    let showUsers = null
+    if (show) {
+      showUsers = (
+        correctUsers.map(user => {
+          return <UserAvatar avatar={user.profilePic} />
+        })
+      )
+    }
+
     return (
       !totals ? 
         (
-          <div className="column is-half is-offset-one-quarter main-column" onClick={this.nextQuestion.bind(this)}>
+          <div className="column is-half is-offset-one-quarter main-column" onClick={this.showResults.bind(this)}>
             <div className="content has-text-centered">
               {
                 this.state.questions.map((question, index) => {
@@ -95,7 +126,8 @@ class Quiz extends Component {
                   return null
                 })
               }
-            </div>          
+              {showUsers}
+            </div>
           </div>
         ) : <Redirect to="/winners" />
     )

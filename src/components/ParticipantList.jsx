@@ -1,15 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { firebaseApp } from '../firebase'
-
-
-const userAvatar = {
-  'borderRadius': '50%',
-  'width': '100%',
-  'height': '100%',
-  'minWidth': '60px',
-  'minHeight': '60px'
-}
+import UserAvatar from './UserAvatar'
 
 class ParticipantList extends Component {
   constructor(props) {
@@ -80,7 +72,7 @@ class ParticipantList extends Component {
             this.state.players.map(user => {
               return (
                 <div className="column is-3 has-text-centered" key={user.createdAt}>
-                  <img style={userAvatar} src={user.profilePic} alt="user-avatar" />
+                  <UserAvatar avatar={user.profilePic} />
                 </div>
               )
             })

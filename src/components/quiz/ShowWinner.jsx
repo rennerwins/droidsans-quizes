@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-
-const userAvatar = {
-  'borderRadius': '50%'
-}
+import React, { Component } from 'react'
+import UserAvatar from '../UserAvatar'
 
 class ShowWinner extends Component {
   constructor(props) {
@@ -30,17 +27,15 @@ class ShowWinner extends Component {
               if (index === 0) {
                 return (
                   <div className="main-column content has-text-centered" key={index}>
-                    <img style={userAvatar} src={user.profilePic} alt="user-avatar" width="150" />
+                    <UserAvatar avatar={user.profilePic} />
                     <h1>{user.name}</h1>
                     <p className="has-text-centered">Number of participants : {this.state.users.length}</p>
                   </div>
                 )
-              } else {
-                return null
               }
+              return null
             })
           }
-          
       </div>
     );
   }

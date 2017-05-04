@@ -1,4 +1,5 @@
 import React from 'react'
+import '../App.css'
 
 const cardStyles = {
   'borderRadius': '3px',
@@ -16,11 +17,14 @@ const questions = {
 }
 
 const QuizItem = ({ question, show, index }) => {
-  let choices = (
-    question.choices.map(choice => { 
+  let choices = null
+  if (!show) {
+    choices = question.choices.map(choice => { 
       return <div className="has-text-centered" style={cardStyles} key={choice}>{choice}</div>
     })
-  )
+  } else {
+    choices = <div className="has-text-centered animated zoomIn correct-answer">{question.answer}</div>
+  }
   
   return (
     <div className="content">

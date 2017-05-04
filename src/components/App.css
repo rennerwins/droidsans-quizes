@@ -41,3 +41,10 @@
   overflow: auto;
   max-height: 500px;
 }
+
+.correct-answer {
+  font-size: 50px;
+  background: #3B76D5;
+  border-radius: 10px;
+  color: white;
+}
