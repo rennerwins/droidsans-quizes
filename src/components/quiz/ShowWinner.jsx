@@ -29,7 +29,7 @@ class ShowWinner extends Component {
     if (!this.state.next) {
       return (
         <div className="main-column content column is-half is-offset-one-quarter scrolling-winner" onClick={this.toSinglePage}>
-          <h2 className="has-text-centered ">Number of participants : {this.state.users.length}</h2>
+          <h2 className="has-text-centered ">WINNERS!!</h2>
           {
             this.state.users.map((user, index) => {
               return <UserAvatar key={user.profilePic} avatar={user.profilePic} />

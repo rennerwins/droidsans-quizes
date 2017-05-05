@@ -63,7 +63,7 @@ class ParticipantList extends Component {
     return (
       <div className="column is-half is-offset-one-quarter main-column">
         <div className="content has-text-centered">
-          <h1>Participants</h1>
+          <h1>Participants : {this.state.players.length}</h1>
           <Link to="/quiz" className="button is-primary" onClick={this.closeStatus.bind(this)}>Start Quiz</Link>
         </div>
 
