@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import UserAvatar from '../UserAvatar'
+import { Redirect } from 'react-router-dom'
 
 class ShowWinner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      next: false
     }
   }
   
@@ -18,19 +20,26 @@ class ShowWinner extends Component {
       })
     })
   }
+
+  toSinglePage = () => {
+    this.setState(state => ({ next: !state.next }))
+  }
   
   render() {
-    return (
-      <div className="main-column content column is-half is-offset-one-quarter scrolling-winner">
-        <h2 className="has-text-centered ">Number of participants : {this.state.users.length}</h2>
+    if (!this.state.next) {
+      return (
+        <div className="main-column content column is-half is-offset-one-quarter scrolling-winner" onClick={this.toSinglePage}>
+          <h2 className="has-text-centered ">Number of participants : {this.state.users.length}</h2>
           {
             this.state.users.map((user, index) => {
-                return <UserAvatar key={user.profilePic} avatar={user.profilePic} />
+              return <UserAvatar key={user.profilePic} avatar={user.profilePic} />
             })
           }
-          
-      </div>
-    );
+        </div>
+      )
+    } else {
+      return <Redirect to="/single" />
+    } 
   }
 }
 

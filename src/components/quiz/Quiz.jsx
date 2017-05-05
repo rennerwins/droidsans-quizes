@@ -51,7 +51,8 @@ class Quiz extends Component {
       this.setState((state) => {
         return {
           number: state.number + 1,
-          show: false
+          show: false,
+          correctUsers: []
         }
       })
       fetch(`https://dsmbot.herokuapp.com/activateQ?qnumber=${this.state.number+2}`)
@@ -129,15 +130,6 @@ class Quiz extends Component {
             </div>
 
             <div className="scrolling-result">
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
-              {showUsers}
               {showUsers}
             </div>
             
