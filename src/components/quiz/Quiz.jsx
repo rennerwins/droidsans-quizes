@@ -108,7 +108,7 @@ class Quiz extends Component {
     if (show) {
       showUsers = (
         correctUsers.map(user => {
-          return <UserAvatar avatar={user.profilePic} />
+          return <UserAvatar key={user.profilePic} avatar={user.profilePic} />
         })
       )
     }
@@ -126,8 +126,21 @@ class Quiz extends Component {
                   return null
                 })
               }
+            </div>
+
+            <div className="scrolling-result">
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
+              {showUsers}
               {showUsers}
             </div>
+            
           </div>
         ) : <Redirect to="/winners" />
     )

@@ -7,6 +7,8 @@ const userAvatar = {
   'minWidth': '60px',
   'minHeight': '60px',
   'maxWidth': '100px',
+  'marginLeft': '15px',
+  'marginRight': '15px'
 }
 
 const UserAvatar = ({avatar}) => {

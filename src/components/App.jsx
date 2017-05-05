@@ -14,6 +14,7 @@ class App extends Component {
           <Route path="/quiz" component={Layout} />
           <Route path="/winners" component={Layout} />
           <Route path="/add" component={Layout} /> 
+          <Route path="/single" component={Layout} />
         </div>
       </Router>
     )

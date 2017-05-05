@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ParticipantList from './ParticipantList'
 import Quiz from './quiz/Quiz'
 import ShowWinner from './quiz/ShowWinner'
+import Single from './Single'
 import './App.css'
 
 class Layout extends Component {
@@ -15,6 +16,8 @@ class Layout extends Component {
       currentPath = <Quiz />
     } else if (pathname === '/winners') {
       currentPath = <ShowWinner />
+    } else if (pathname === '/single') {
+      currentPath = <Single />
     }
     return (
       <section>

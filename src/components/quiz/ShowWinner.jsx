@@ -10,7 +10,7 @@ class ShowWinner extends Component {
   }
   
   componentDidMount() {
-    fetch('https://dsmbot.herokuapp.com/getParticipantsScore')
+    fetch('https://dsmbot.herokuapp.com/getParticipantsScore?winner=true')
     .then(res => res.json())
     .then(res => {
       this.setState({
@@ -21,21 +21,14 @@ class ShowWinner extends Component {
   
   render() {
     return (
-      <div className="column is-half is-offset-one-quarter">
+      <div className="main-column content column is-half is-offset-one-quarter scrolling-winner">
+        <h2 className="has-text-centered ">Number of participants : {this.state.users.length}</h2>
           {
             this.state.users.map((user, index) => {
-              if (index === 0) {
-                return (
-                  <div className="main-column content has-text-centered" key={index}>
-                    <UserAvatar avatar={user.profilePic} />
-                    <h1>{user.name}</h1>
-                    <p className="has-text-centered">Number of participants : {this.state.users.length}</p>
-                  </div>
-                )
-              }
-              return null
+                return <UserAvatar key={user.profilePic} avatar={user.profilePic} />
             })
           }
+          
       </div>
     );
   }

@@ -38,12 +38,25 @@
 }
 
 .scrolling {
+  text-align: center;
   overflow: auto;
   max-height: 500px;
 }
 
+.scrolling-winner {
+  text-align: center;
+  overflow: auto;
+  max-height: 800px;
+}
+
+.scrolling-result {
+  text-align: center;
+  overflow: auto;
+  max-height: 400px;
+}
+
 .correct-answer {
-  font-size: 50px;
+  font-size: 45px;
   background: #3B76D5;
   border-radius: 10px;
   color: white;
