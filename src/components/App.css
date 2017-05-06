@@ -40,19 +40,19 @@
 .scrolling {
   text-align: center;
   overflow: auto;
-  max-height: 500px;
+  max-height: 480px;
 }
 
 .scrolling-winner {
   text-align: center;
   overflow: auto;
-  max-height: 800px;
+  max-height: 480px;
 }
 
 .scrolling-result {
   text-align: center;
   overflow: auto;
-  max-height: 400px;
+  max-height: 380px;
 }
 
 .correct-answer {
@@ -60,4 +60,16 @@
   background: #3B76D5;
   border-radius: 10px;
   color: white;
+}
+
+.correct-user {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  min-width: 60px;
+  min-height: 60px;
+  max-width: 130px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 5px;
 }

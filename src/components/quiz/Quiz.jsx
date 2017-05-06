@@ -84,11 +84,20 @@ class Quiz extends Component {
     })
   }
 
+  closeAnswerTime() {
+    fetch('http://dsmbot.herokuapp.com/closeAnswerTime')
+    .then(res => res.json())
+    .then(res => {
+      console.log('close answer', res)
+    })
+  }
+
   showResults() {
     const { show, number } = this.state
     if (!show) {
       this.changeShowStatus()
       this.getCorrectedUsers(number)
+      this.closeAnswerTime()
     } else {
       this.changeShowStatus()
       this.nextQuestion()
