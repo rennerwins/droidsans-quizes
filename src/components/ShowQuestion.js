@@ -95,23 +95,35 @@ class ShowQuestion extends Component {
 						return <ChoiceList choice={choice} key={index} />
 					})}
 
-					<button className="button is-primary" onClick={this.startQuiz}>
-						Start
-					</button>
-					{this.state.isLastQuestion
-						? <button className="button is-danger" onClick={this.endQuizNow}>
-								End
+					<div className="columns is-mobile has-text-centered">
+						<div className="column">
+							<button className="button is-primary" onClick={this.startQuiz}>
+								Start
 							</button>
-						: <button
-								className="button is-danger"
-								onClick={this.closeAnswerPeriod}
-							>
-								End
-							</button>}
+						</div>
 
-					<button className="button is-info" onClick={this.showResult}>
-						Result
-					</button>
+						<div className="column">
+							{this.state.isLastQuestion
+								? <button
+										className="button is-danger"
+										onClick={this.endQuizNow}
+									>
+										End
+									</button>
+								: <button
+										className="button is-danger"
+										onClick={this.closeAnswerPeriod}
+									>
+										End
+									</button>}
+						</div>
+
+						<div className="column">
+							<button className="button is-info" onClick={this.showResult}>
+								Result
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		)
