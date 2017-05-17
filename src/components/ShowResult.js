@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import api from '../api'
 
+const userAvatar = {
+	width: '80px',
+	borderRadius: '50%',
+	margin: '6px'
+}
+
 class ShowResult extends Component {
 	constructor(props) {
 		super(props)
@@ -9,7 +15,8 @@ class ShowResult extends Component {
 			count: 0,
 			result: '',
 			winner: [],
-			error: ''
+			error: '',
+			amount: 0
 		}
 	}
 
@@ -21,7 +28,8 @@ class ShowResult extends Component {
 					count,
 					result,
 					winner,
-					error
+					error,
+					amount: winner.length
 				}
 			})
 		})
@@ -29,12 +37,23 @@ class ShowResult extends Component {
 
 	render() {
 		return (
-			<div>
-				count : {this.state.count}
-				result: {this.state.result}
-				winner: {this.state.winner.map((user, index) => {
-					return <img src={user.profilePic} key={index} alt={user.name} />
-				})}
+			<div className="container">
+				<div className="content">
+					<h2>จำนวนผู้เข้าร่วมโหวต : {this.state.count}</h2>
+					<h2>ผลโหวตสูงสุด : {this.state.result} ({this.state.amount})</h2>
+
+					{this.state.winner.map((user, index) => {
+						return (
+							<img
+								style={userAvatar}
+								src={user.profilePic}
+								key={index}
+								alt={user.name}
+							/>
+						)
+					})}
+
+				</div>
 			</div>
 		)
 	}

@@ -10,17 +10,20 @@ class ShowQuestion extends Component {
 			question: '',
 			choices: [],
 			status: '',
-			showResult: false
+			showResult: false,
+			isLastQuestion: false
 		}
 	}
 
 	componentDidMount() {
 		api.getQuestion().then(res => {
-			let { q, choices } = res.quiz
+			console.log(res)
+			let { q, choices, isLastQuestion } = res.quiz
 			this.setState(() => {
 				return {
 					question: q,
-					choices
+					choices,
+					isLastQuestion
 				}
 			})
 		})
@@ -38,12 +41,24 @@ class ShowQuestion extends Component {
 		})
 	}
 
-	endQuiz = () => {
+	closeAnswerPeriod = () => {
 		api.closeAnswerPeriod().then(res => {
 			if (res.status === 'done') {
 				this.setState(() => {
 					return {
 						status: 'Closed'
+					}
+				})
+			}
+		})
+	}
+
+	endQuizNow = () => {
+		api.endQuizNow().then(res => {
+			if (res.status === 'done') {
+				this.setState(() => {
+					return {
+						status: 'Quiz ended'
 					}
 				})
 			}
@@ -75,9 +90,17 @@ class ShowQuestion extends Component {
 					<button className="button is-primary" onClick={this.startQuiz}>
 						Start
 					</button>
-					<button className="button is-danger" onClick={this.endQuiz}>
-						End
-					</button>
+					{this.state.isLastQuestion
+						? <button className="button is-danger" onClick={this.endQuizNow}>
+								End
+							</button>
+						: <button
+								className="button is-danger"
+								onClick={this.closeAnswerPeriod}
+							>
+								End
+							</button>}
+
 					<button className="button is-info" onClick={this.showResult}>
 						Result
 					</button>

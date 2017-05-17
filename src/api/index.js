@@ -56,6 +56,13 @@ const createNewQuestion = (question, choices, lastQuestion) => {
 		})
 }
 
+// End quiz -- /endQuizNow
+const endQuizNow = () => {
+	return axios.get(`${url}/endQuizNow`).then(res => {
+		return res.data
+	})
+}
+
 // Export function
 module.exports = {
 	getQuestion,
@@ -63,5 +70,6 @@ module.exports = {
 	getVoteResult,
 	startQuiz,
 	closeAnswerPeriod,
-	createNewQuestion
+	createNewQuestion,
+	endQuizNow
 }
