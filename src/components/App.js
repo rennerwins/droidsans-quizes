@@ -4,6 +4,7 @@ import NewQuestionForm from './NewQuestionForm'
 import ShowQuestion from './ShowQuestion'
 import ShowResult from './ShowResult'
 import Nav from './Nav'
+import '../static/css/style.css'
 
 class App extends Component {
 	render() {
@@ -11,7 +12,7 @@ class App extends Component {
 			<Router>
 				<section>
 					<Nav />
-					<div className="container" style={{ padding: '16px' }}>
+					<div className="container main-body">
 						<Switch>
 							<Route exact path="/" component={ShowQuestion} />
 							<Route path="/newquestion" component={NewQuestionForm} />

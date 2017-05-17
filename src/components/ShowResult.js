@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import api from '../api'
+import PropTypes from 'prop-types'
 
-const userAvatar = {
-	width: '80px',
-	borderRadius: '50%',
-	margin: '6px'
+const UserAvatar = props => {
+	let { profilePic, name } = props.user
+	return <img className="user-avatar" src={profilePic} alt={name} />
+}
+
+UserAvatar.propTypes = {
+	user: PropTypes.object.isRequired
 }
 
 class ShowResult extends Component {
@@ -43,14 +47,7 @@ class ShowResult extends Component {
 					<h2>ผลโหวตสูงสุด : {this.state.result} ({this.state.amount})</h2>
 
 					{this.state.winner.map((user, index) => {
-						return (
-							<img
-								style={userAvatar}
-								src={user.profilePic}
-								key={index}
-								alt={user.name}
-							/>
-						)
+						return <UserAvatar user={user} key={index} />
 					})}
 
 				</div>

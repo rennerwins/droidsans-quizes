@@ -1,6 +1,16 @@
 import React, { Component } from 'react'
 import api from '../api'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+const ChoiceList = props => {
+	let { choice } = props
+	return <div className="box">{choice}</div>
+}
+
+ChoiceList.propTypes = {
+	choice: PropTypes.string.isRequired
+}
 
 class ShowQuestion extends Component {
 	constructor(props) {
@@ -17,7 +27,6 @@ class ShowQuestion extends Component {
 
 	componentDidMount() {
 		api.getQuestion().then(res => {
-			console.log(res)
 			let { q, choices, isLastQuestion } = res.quiz
 			this.setState(() => {
 				return {
@@ -72,10 +81,6 @@ class ShowQuestion extends Component {
 	}
 
 	render() {
-		let choices = this.state.choices.map((choice, index) => {
-			return <div className="box" key={index}>{choice}</div>
-		})
-
 		if (this.state.showResult) {
 			return <Redirect to="/result" />
 		}
@@ -85,7 +90,10 @@ class ShowQuestion extends Component {
 				<div className="container">
 					{this.state.status}
 					<h1>{this.state.question}</h1>
-					{choices}
+
+					{this.state.choices.map((choice, index) => {
+						return <ChoiceList choice={choice} key={index} />
+					})}
 
 					<button className="button is-primary" onClick={this.startQuiz}>
 						Start
