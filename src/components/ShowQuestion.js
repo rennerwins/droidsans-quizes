@@ -25,7 +25,9 @@ class ShowQuestion extends Component {
 		}
 	}
 
-	componentDidMount() {
+	// componentDidMount() {}
+
+	beginQuiz = () => {
 		api.getQuestion().then(res => {
 			let { q, choices, isLastQuestion } = res.quiz
 			this.setState(() => {
@@ -94,6 +96,14 @@ class ShowQuestion extends Component {
 					{this.state.choices.map((choice, index) => {
 						return <ChoiceList choice={choice} key={index} />
 					})}
+
+					<div className="columns">
+						<div className="column">
+							<button className="button is-primary" onClick={this.beginQuiz}>
+								Begin
+							</button>
+						</div>
+					</div>
 
 					<div className="columns is-mobile has-text-centered">
 						<div className="column">
